@@ -12,9 +12,10 @@ import { useUsingContext } from './hooks/useUsingContext'
 import HeaderComponent from './components/Header/index.vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useChatStore, usePromptStore } from '@/store'
+import { useAuthStore,useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
+import Permission from './layout/Permission.vue'
 
 let controller = new AbortController()
 
@@ -461,6 +462,15 @@ onUnmounted(() => {
   if (loading.value)
     controller.abort()
 })
+const authStore = useAuthStore()
+
+const needPermission = computed(() => !!authStore.session?.auth && !authStore.token)
+const showPermission = ref(false)
+function checkPermission(){
+  if(needPermission.value){
+    showPermission.value = true;
+  }
+}
 </script>
 
 <template>
@@ -540,6 +550,7 @@ onUnmounted(() => {
                 @focus="handleFocus"
                 @blur="handleBlur"
                 @keypress="handleEnter"
+                @click="checkPermission"
               />
             </template>
           </NAutoComplete>
@@ -550,6 +561,8 @@ onUnmounted(() => {
               </span>
             </template>
           </NButton>
+          <Permission :visible="showPermission" />
+
         </div>
       </div>
     </footer>

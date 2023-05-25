@@ -56,22 +56,15 @@ function handlePress(event: KeyboardEvent) {
     <div class="p-10 bg-white rounded dark:bg-slate-800">
       <div class="space-y-4">
         <header class="space-y-2">
-          <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-neutral-200">
-            403
-          </h2>
-          <p class="text-base text-center text-slate-500 dark:text-slate-500">
-            {{ $t('common.unauthorizedTips') }}
+          <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-neutral-200"> 亲，请输入免费口令 </h2>
+          <p class="text-base text-center text-slate-500 dark:text-slate-500"
+            style="font-size: 0.9rem; letter-spacing: 0.8px; font-weight: 600;"> ❤️需要口令的目的：确认是自己人<br>
+            ❤️一个设备只需输入一次，以后不再弹框<br> ⭐获取方式：<br>搜索关注微信公众号<br><span
+              style="color: rgb(248, 81, 73);">【灰猫未来科技】</span><br>灰猫将<span style="color: rgb(248, 81, 73);">自动秒发</span>
           </p>
-          <Icon403 class="w-[200px] m-auto" />
         </header>
         <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
-        <NButton
-          block
-          type="primary"
-          :disabled="disabled"
-          :loading="loading"
-          @click="handleVerify"
-        >
+        <NButton block type="primary" :disabled="disabled" :loading="loading" @click="handleVerify">
           {{ $t('common.verify') }}
         </NButton>
       </div>
