@@ -1,51 +1,11 @@
 import express from 'express'
+import * as dotenv from 'dotenv'
 import type { RequestProps } from './types'
 import type { ChatMessage } from './chatgpt'
 import { chatConfig, chatReplyProcess, currentModel } from './chatgpt'
 import { auth } from './middleware/auth'
 import { limiter } from './middleware/limiter'
 import { isNotEmptyString } from './utils/is'
-import * as dotenv from 'dotenv'
-const mysql = require('mysql');
-
-// 引入mysql模块
-
-// 创建一个连接对象，配置数据库的连接信息
-const connection = mysql.createConnection({
-  host: '43.131.251.187', // 数据库的主机地址
-  user: 'chat', // 数据库的用户名
-  password: 'Jarin942422490', // 数据库的密码
-  database: 'chat_huimao_fun', // 数据库的名称
-  port:3307
-});
-
-// 连接到数据库
-connection.connect((err) => {
-  console.log('数据库');
-  if (err) {
-      console.error('error connecting: ' + err.stack);
-      return;
-    }
-
-    console.log('connected as id ' + connection.threadId);
-});
-
-// 定义一个查询语句，从token表中取userid为0的token值
-const query = 'SELECT token FROM token WHERE userid = 1';
-let token;
-// 执行查询语句，并处理结果或错误
-connection.query(query, (error, results, fields) => {
-if (error) {
-    console.log(error);
-  } else {
-    console.log('数据库：',results); // 打印查询结果
-    token = results;
-  }
-});
-
-// 关闭数据库连接
-// connection.end();
-
 
 const app = express()
 const router = express.Router()

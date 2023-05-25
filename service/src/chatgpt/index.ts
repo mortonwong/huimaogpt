@@ -11,6 +11,51 @@ import type { ApiModel, ChatContext, ChatGPTUnofficialProxyAPIOptions, ModelConf
 import type { RequestOptions, SetProxyOptions, UsageResponse } from './types'
 
 const { HttpsProxyAgent } = httpsProxyAgent
+const mysql = require('mysql')
+
+// 引入mysql模块
+
+// 创建一个连接对象，配置数据库的连接信息
+const connection = mysql.createConnection({
+  host: '43.131.251.187', // 数据库的主机地址
+  user: 'chat', // 数据库的用户名
+  password: 'Jarin942422490', // 数据库的密码
+  database: 'chat_huimao_fun', // 数据库的名称
+  port: 3307,
+})
+let Token
+
+async function getApiKeyFromMySql() {
+// 连接到数据库
+  await new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        console.error(`error connecting: ${err.stack}`)
+        reject(err)
+        return
+      }
+      resolve()
+      console.log(`connected as id ${connection.threadId}`)
+    })
+  })
+
+  // 定义一个查询语句，从token表中取userid为0的token值
+  const query = 'SELECT token FROM token WHERE userid = 1'
+  // 执行查询语句，并处理结果或错误
+  await new Promise((resolve, reject) => {
+    connection.query(query, (error, results, fields) => {
+      if (error) {
+        console.log(error)
+      }
+      else {
+        console.log('数据库：', JSON.stringify(results[0].token)) // 打印查询结果
+        Token = JSON.stringify(results[0].token)
+        return Token
+        connection.end()
+      }
+    })
+  })
+}
 
 dotenv.config()
 
@@ -29,19 +74,16 @@ const disableDebug: boolean = process.env.OPENAI_API_DISABLE_DEBUG === 'true'
 let apiModel: ApiModel
 const model = isNotEmptyString(process.env.OPENAI_API_MODEL) ? process.env.OPENAI_API_MODEL : 'gpt-3.5-turbo'
 
-if (!isNotEmptyString(process.env.OPENAI_API_KEY) && !isNotEmptyString(process.env.OPENAI_ACCESS_TOKEN))
-  throw new Error('Missing OPENAI_API_KEY or OPENAI_ACCESS_TOKEN environment variable')
-
 let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
 (async () => {
   // More Info: https://github.com/transitive-bullshit/chatgpt-api
-
-  if (isNotEmptyString(process.env.OPENAI_API_KEY)) {
+  await getApiKeyFromMySql()
+  if (isNotEmptyString(Token)) {
     const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
 
     const options: ChatGPTAPIOptions = {
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: Token,
       completionParams: { model },
       debug: !disableDebug,
     }
@@ -119,7 +161,7 @@ async function chatReplyProcess(options: RequestOptions) {
 }
 
 async function fetchUsage() {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+  const OPENAI_API_KEY = Token
   const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
 
   if (!isNotEmptyString(OPENAI_API_KEY))
