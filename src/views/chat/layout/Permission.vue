@@ -63,7 +63,7 @@ function handlePress(event: KeyboardEvent) {
               style="color: rgb(248, 81, 73);">【灰猫未来科技】</span><br>灰猫将<span style="color: rgb(248, 81, 73);">自动秒发</span>
           </p>
         </header>
-        <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
+        <NInput v-model:value="token" type="password" placeholder="请输入免费口令" @keypress="handlePress" />
         <NButton block type="primary" :disabled="disabled" :loading="loading" @click="handleVerify">
           {{ $t('common.verify') }}
         </NButton>
