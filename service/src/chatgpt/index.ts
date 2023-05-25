@@ -25,38 +25,6 @@ const connection = mysql.createConnection({
 })
 let Token
 
-async function getApiKeyFromMySql() {
-// 连接到数据库
-  await new Promise((resolve, reject) => {
-    connection.connect((err) => {
-      if (err) {
-        console.error(`error connecting: ${err.stack}`)
-        reject(err)
-        return
-      }
-      resolve()
-      console.log(`connected as id ${connection.threadId}`)
-    })
-  })
-
-  // 定义一个查询语句，从token表中取userid为0的token值
-  const query = 'SELECT token FROM token WHERE userid = 1'
-  // 执行查询语句，并处理结果或错误
-  await new Promise((resolve, reject) => {
-    connection.query(query, (error, results, fields) => {
-      if (error) {
-        console.log(error)
-      }
-      else {
-        console.log('数据库：', JSON.stringify(results[0].token)) // 打印查询结果
-        Token = JSON.stringify(results[0].token)
-        return Token
-        connection.end()
-      }
-    })
-  })
-}
-
 dotenv.config()
 
 const ErrorCodeMessage: Record<string, string> = {
@@ -78,7 +46,38 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
 (async () => {
   // More Info: https://github.com/transitive-bullshit/chatgpt-api
-  await getApiKeyFromMySql()
+  // 连接到数据库
+  await new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        console.error(`error connecting: ${err.stack}`)
+        reject(err)
+        return
+      }
+      resolve()
+      console.log(`connected as id ${connection.threadId}`)
+    })
+  })
+
+  // 执行查询语句，并处理结果或错误
+  await new Promise((resolve, reject) => {
+    // 定义一个查询语句，从token表中取userid为0的token值
+    const query = 'SELECT token FROM token WHERE userid = 1'
+    connection.query(query, (error, results, fields) => {
+      if (error) {
+        console.log(error)
+        reject(err)
+      }
+      else {
+        console.log('数据库：', results[0].token) // 打印查询结果
+        Token = results[0].token
+        resolve(Token)
+
+        connection.end()
+      }
+    })
+  })
+  console.log('哈1', Token)
   if (isNotEmptyString(Token)) {
     const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
 
@@ -107,6 +106,7 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
     setupProxy(options)
 
     api = new ChatGPTAPI({ ...options })
+    console.log('api', api)
     apiModel = 'ChatGPTAPI'
   }
   else {
@@ -163,6 +163,7 @@ async function chatReplyProcess(options: RequestOptions) {
 async function fetchUsage() {
   const OPENAI_API_KEY = Token
   const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
+  console.log('哈222', Token)
 
   if (!isNotEmptyString(OPENAI_API_KEY))
     return Promise.resolve('-')
