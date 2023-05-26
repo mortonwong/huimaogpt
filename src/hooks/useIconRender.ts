@@ -1,3 +1,4 @@
+import type { ConcreteComponent } from 'vue'
 import { h } from 'vue'
 import { SvgIcon } from '@/components/common'
 
@@ -12,6 +13,7 @@ export const useIconRender = () => {
     color?: string
     fontSize?: string
   }
+  interface AppProps {}
 
   const iconRender = (config: IconConfig) => {
     const { color, fontSize, icon } = config
@@ -27,7 +29,7 @@ export const useIconRender = () => {
     if (!icon)
       window.console.warn('iconRender: icon is required')
 
-    return () => h(SvgIcon, { icon, style })
+    return () => h(SvgIcon as ConcreteComponent<AppProps>, { icon, style })
   }
 
   return {
