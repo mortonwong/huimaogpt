@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { NButton, NInput, NModal, useMessage } from 'naive-ui'
 import { fetchVerify } from '@/api'
 import { useAuthStore } from '@/store'
-import Icon403 from '@/icons/403.vue'
+// import Icon403 from '@/icons/403.vue'
 
 interface Props {
   visible: boolean

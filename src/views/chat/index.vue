@@ -55,7 +55,7 @@ dataSources.value.forEach((item, index) => {
 
 function handleSubmit() {
   if(buttonDisabled.value){
-    ms.info('请输入内容以进行提交')
+    // ms.info('请输入内容以进行提交')
     return
   }
   onConversation()

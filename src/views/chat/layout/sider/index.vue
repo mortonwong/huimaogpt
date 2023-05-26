@@ -85,6 +85,11 @@ watch(
             {{ $t('store.siderButton') }}
           </NButton>
         </div>
+        <div class="p-4">
+          <NButton block @click="show = true">
+            {{ $t('store.siderButton') }}
+          </NButton>
+        </div>
       </main>
       <Footer />
     </div>
