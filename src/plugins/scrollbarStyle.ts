@@ -8,7 +8,7 @@ const setupScrollbarStyle = () => {
       width: ${lightTheme.Scrollbar.common?.scrollbarWidth};
     }
     ::-webkit-scrollbar-thumb {
-      background-color: ${lightTheme.Scrollbar.common?.scrollbarColor};
+      background-color: rgb(0 0 0 / 4%);
       border-radius: ${lightTheme.Scrollbar.common?.scrollbarBorderRadius};
     }
     html.dark ::-webkit-scrollbar {

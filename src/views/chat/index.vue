@@ -10,12 +10,12 @@ import { useScroll } from './hooks/useScroll'
 import { useChat } from './hooks/useChat'
 import { useUsingContext } from './hooks/useUsingContext'
 import HeaderComponent from './components/Header/index.vue'
+import Permission from './layout/Permission.vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useAuthStore,useChatStore, usePromptStore } from '@/store'
+import { useAuthStore, useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
-import Permission from './layout/Permission.vue'
 
 let controller = new AbortController()
 
@@ -54,7 +54,7 @@ dataSources.value.forEach((item, index) => {
 })
 
 function handleSubmit() {
-  if(buttonDisabled.value){
+  if (buttonDisabled.value) {
     // ms.info('请输入内容以进行提交')
     return
   }
@@ -470,10 +470,9 @@ const authStore = useAuthStore()
 
 const needPermission = computed(() => !!authStore.session?.auth && !authStore.token)
 const showPermission = ref(false)
-function checkPermission(){
-  if(needPermission.value){
-    showPermission.value = true;
-  }
+function checkPermission() {
+  if (needPermission.value)
+    showPermission.value = true
 }
 </script>
 
@@ -547,6 +546,7 @@ function checkPermission(){
               <NInput
                 ref="inputRef"
                 v-model:value="prompt"
+                style="padding: 5px;"
                 type="textarea"
                 :placeholder="placeholder"
                 :autosize="{ minRows: 1, maxRows: isMobile ? 4 : 8 }"
@@ -558,7 +558,10 @@ function checkPermission(){
               />
             </template>
           </NAutoComplete>
-          <NButton type="primary" @click="handleSubmit">
+          <NButton
+            type="primary" style="    padding: 21px 12px;
+    border-radius: 21px;" @click="handleSubmit"
+          >
             <template #icon>
               <span class="dark:text-black">
                 <SvgIcon icon="ri:send-plane-fill" />
@@ -566,7 +569,6 @@ function checkPermission(){
             </template>
           </NButton>
           <Permission :visible="showPermission" />
-
         </div>
       </div>
     </footer>

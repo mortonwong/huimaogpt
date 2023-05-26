@@ -104,7 +104,7 @@ async function handleCopy() {
     >
       <AvatarComponent :image="inversion" />
     </div>
-    <div class="overflow-hidden text-sm " :class="[inversion ? 'items-end' : 'items-start']">
+    <div class="overflow-hidden text-base " :class="[inversion ? 'items-end' : 'items-start']">
       <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
         {{ dateTime }}
       </p>
@@ -144,6 +144,7 @@ async function handleCopy() {
     </div>
   </div>
 </template>
+
 <style>
 .mySay{
   background: linear-gradient(90deg, #2870EA 10.79%, #1B4AEF 87.08%);

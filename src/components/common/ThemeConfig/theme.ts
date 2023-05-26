@@ -1,8 +1,8 @@
 import type { GlobalThemeOverrides } from 'naive-ui'
-const blue:any = {
-normal:'#154EC1',
-hover:'#3868c9',
-pressed:'#1749ad',
+const blue: any = {
+  normal: '#154EC1',
+  hover: '#3868c9',
+  pressed: '#1749ad',
 }
 const themeOverrides: GlobalThemeOverrides = {
   common: {
@@ -11,6 +11,7 @@ const themeOverrides: GlobalThemeOverrides = {
     primaryColorHover: blue.hover,
     primaryColorPressed: blue.normal,
     iconColor: blue.normal,
+    fontSize: '16px',
     iconColorHover: blue.hover,
     iconColorPressed: blue.pressed,
     // dividerColor: '#154EC1',
@@ -21,7 +22,7 @@ const themeOverrides: GlobalThemeOverrides = {
     borderRadiusSmall: '15px',
     // iconColorDisabled: '#154EC1',
     // primaryColorSuppl: '#4098FC'
-  }
+  },
   // Button: {
   //     textColor: '#FF0000'
   // }

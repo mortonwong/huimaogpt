@@ -66,9 +66,9 @@ watch(
     collapse-mode="transform"
     position="absolute"
     bordered
-    :style="getMobileClass+';background-color: #f7f9fd;'"
-    @update-collapsed="handleUpdateCollapsed"
+    :style="`${getMobileClass};background-color: #f7f9fd;`"
     class="mySider"
+    @update-collapsed="handleUpdateCollapsed"
   >
     <div class="flex flex-col h-full" :style="mobileSafeArea">
       <main class="flex flex-col flex-1 min-h-0">
@@ -85,11 +85,6 @@ watch(
             {{ $t('store.siderButton') }}
           </NButton>
         </div>
-        <div class="p-4">
-          <NButton block @click="show = true">
-            {{ $t('store.siderButton') }}
-          </NButton>
-        </div>
       </main>
       <Footer />
     </div>
@@ -97,6 +92,7 @@ watch(
 
   <PromptStore v-model:visible="show" />
 </template>
+
 <style>
 .mySider{
   border-radius: 10px;
