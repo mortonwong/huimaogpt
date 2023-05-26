@@ -54,6 +54,10 @@ dataSources.value.forEach((item, index) => {
 })
 
 function handleSubmit() {
+  if(buttonDisabled.value){
+    ms.info('请输入内容以进行提交')
+    return
+  }
   onConversation()
 }
 
@@ -534,7 +538,7 @@ function checkPermission(){
             </span>
           </HoverButton>
           <HoverButton v-if="!isMobile" @click="toggleUsingContext">
-            <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
+            <span class="text-xl" :class="{ 'text-[#154EC1]': usingContext, 'text-[#a8071a]': !usingContext }">
               <SvgIcon icon="ri:chat-history-line" />
             </span>
           </HoverButton>
@@ -554,7 +558,7 @@ function checkPermission(){
               />
             </template>
           </NAutoComplete>
-          <NButton type="primary" :disabled="buttonDisabled" @click="handleSubmit">
+          <NButton type="primary" @click="handleSubmit">
             <template #icon>
               <span class="dark:text-black">
                 <SvgIcon icon="ri:send-plane-fill" />

@@ -119,6 +119,7 @@ async function handleCopy() {
           :text="text"
           :loading="loading"
           :as-raw-text="asRawText"
+          :class="[inversion ? 'mySay' : 'gptSay']"
         />
         <div class="flex flex-col">
           <button
@@ -143,3 +144,19 @@ async function handleCopy() {
     </div>
   </div>
 </template>
+<style>
+.mySay{
+  background: linear-gradient(90deg, #2870EA 10.79%, #1B4AEF 87.08%);
+    color: white;
+    border-radius: 10px;
+    margin: 3px;
+    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
+}
+.gptSay{
+  border-radius: 10px;
+    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
+    position: relative;
+    margin: 3px;
+    background: #fff;
+}
+</style>
