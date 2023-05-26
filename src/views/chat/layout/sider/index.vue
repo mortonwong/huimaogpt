@@ -66,8 +66,8 @@ watch(
     collapse-mode="transform"
     position="absolute"
     bordered
-    :style="`${getMobileClass};background-color: #f7f9fd;`"
-    class="mySider"
+    :style="`${getMobileClass};background-color: #f7f9fd;z-index:41;`"
+    class="mySider z-45"
     @update-collapsed="handleUpdateCollapsed"
   >
     <div class="flex flex-col h-full" :style="mobileSafeArea">
@@ -89,7 +89,9 @@ watch(
       <Footer />
     </div>
   </NLayoutSider>
-
+  <template v-if="isMobile">
+    <div v-show="!collapsed" class="fixed inset-0 z-40 w-full h-full bg-black/40" @click="handleUpdateCollapsed" />
+  </template>
   <PromptStore v-model:visible="show" />
 </template>
 
