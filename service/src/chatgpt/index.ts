@@ -9,9 +9,9 @@ import { sendResponse } from '../utils'
 import { isNotEmptyString } from '../utils/is'
 import type { ApiModel, ChatContext, ChatGPTUnofficialProxyAPIOptions, ModelConfig } from '../types'
 import type { RequestOptions, SetProxyOptions, UsageResponse } from './types'
-
 const { HttpsProxyAgent } = httpsProxyAgent
-const mysql = require('mysql')
+import mysql from 'mysql'
+
 
 // 引入mysql模块
 
