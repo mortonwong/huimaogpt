@@ -2,7 +2,7 @@ import { useChatStore } from '@/store'
 
 export function useChat() {
   const chatStore = useChatStore()
-
+  
   const getChatByUuidAndIndex = (uuid: number, index: number) => {
     return chatStore.getChatByUuidAndIndex(uuid, index)
   }
@@ -18,11 +18,16 @@ export function useChat() {
   const updateChatSome = (uuid: number, index: number, chat: Partial<Chat.Chat>) => {
     chatStore.updateChatSomeByUuid(uuid, index, chat)
   }
+  
+  const getChatData =()=>{
+    return chatStore.getChatData()
+  }
 
   return {
     addChat,
     updateChat,
     updateChatSome,
     getChatByUuidAndIndex,
+    getChatData,
   }
 }

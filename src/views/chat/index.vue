@@ -28,7 +28,7 @@ const ms = useMessage()
 const chatStore = useChatStore()
 
 const { isMobile } = useBasicLayout()
-const { addChat, updateChat, updateChatSome, getChatByUuidAndIndex } = useChat()
+const { addChat, updateChat, updateChatSome, getChatByUuidAndIndex,getChatData } = useChat()
 const { scrollRef, scrollToBottom, scrollToBottomIfAtBottom } = useScroll()
 const { usingContext, toggleUsingContext } = useUsingContext()
 
@@ -58,7 +58,8 @@ function handleSubmit() {
     // ms.info('请输入内容以进行提交')
     return
   }
-  onConversation()
+  if(checkPermission())
+   onConversation()
 }
 
 async function onConversation() {
@@ -466,13 +467,17 @@ onUnmounted(() => {
   if (loading.value)
     controller.abort()
 })
-const authStore = useAuthStore()
 
-const needPermission = computed(() => !!authStore.session?.auth && !authStore.token)
-const showPermission = ref(false)
+const showLogin= ref(false)
 function checkPermission() {
-  if (needPermission.value)
-    showPermission.value = true
+  if(getChatData()[0].data.length>=2){
+    console.log('login')
+    // 打开登录框
+    showLogin.value = true
+    return false
+  }else{
+    return true
+  }
 }
 </script>
 
@@ -554,7 +559,6 @@ function checkPermission() {
                 @focus="handleFocus"
                 @blur="handleBlur"
                 @keypress="handleEnter"
-                @click="checkPermission"
               />
             </template>
           </NAutoComplete>
@@ -568,7 +572,7 @@ function checkPermission() {
               </span>
             </template>
           </NButton>
-          <Permission :visible="showPermission" />
+          <Permission :visible="showLogin" />
         </div>
       </div>
     </footer>
