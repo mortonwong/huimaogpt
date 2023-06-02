@@ -13,7 +13,7 @@ import HeaderComponent from './components/Header/index.vue'
 import Permission from './layout/Permission.vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useAuthStore, useChatStore, usePromptStore } from '@/store'
+import { useChatStore, usePromptStore, useUserStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 
@@ -26,9 +26,11 @@ const dialog = useDialog()
 const ms = useMessage()
 
 const chatStore = useChatStore()
+const userStore = useUserStore()
+const userInfo = computed(() => userStore.userInfo)
 
 const { isMobile } = useBasicLayout()
-const { addChat, updateChat, updateChatSome, getChatByUuidAndIndex,getChatData } = useChat()
+const { addChat, updateChat, updateChatSome, getChatByUuidAndIndex, getChatData } = useChat()
 const { scrollRef, scrollToBottom, scrollToBottomIfAtBottom } = useScroll()
 const { usingContext, toggleUsingContext } = useUsingContext()
 
@@ -58,8 +60,8 @@ function handleSubmit() {
     // ms.info('请输入内容以进行提交')
     return
   }
-  if(checkPermission())
-   onConversation()
+  if (checkPermission())
+    onConversation()
 }
 
 async function onConversation() {
@@ -468,14 +470,20 @@ onUnmounted(() => {
     controller.abort()
 })
 
-const showLogin= ref(false)
+const showLogin = ref(false)
+function handleRegister() {
+  showLogin.value = false
+}
 function checkPermission() {
-  if(getChatData()[0].data.length>=2){
+  if (userInfo.value.isLogin)
+    return true
+  if (getChatData()[0].data.length >= 4) {
     console.log('login')
     // 打开登录框
     showLogin.value = true
     return false
-  }else{
+  }
+  else {
     return true
   }
 }
@@ -572,7 +580,7 @@ function checkPermission() {
               </span>
             </template>
           </NButton>
-          <Permission :visible="showLogin" />
+          <Permission :visible="showLogin" @can-close="handleRegister" />
         </div>
       </div>
     </footer>

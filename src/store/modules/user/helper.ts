@@ -6,6 +6,8 @@ export interface UserInfo {
   avatar: string
   name: string
   description: string
+  isLogin?: boolean
+  vip?: number
 }
 
 export interface UserState {
@@ -16,8 +18,9 @@ export function defaultSetting(): UserState {
   return {
     userInfo: {
       avatar: 'http://chat.huimao.fun/avatar.jpg',
-      name: '灰猫GPT',
+      name: '知潮GPT',
       description: '免费ChatGPT镜像站',
+      isLogin: false,
     },
   }
 }

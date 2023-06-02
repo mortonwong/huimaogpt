@@ -70,9 +70,15 @@ export function sendEmail<T>(email: string) {
     data: { email },
   })
 }
-export function usercreate<T>(email: string,emailCode:string,userName:string,password:string) {
+export function usercreate<T>(email: string, emailCode: string, userName: string, password: string, SCC: string) {
   return post<T>({
     url: '/usercreate',
-    data: { email,emailCode,userName,password },
+    data: { email, emailCode, userName, password, SCC },
+  })
+}
+export function userlogin<T>(userName: string, password: string, type: string) {
+  return post<T>({
+    url: '/userlogin',
+    data: { userName, password, type },
   })
 }

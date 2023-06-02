@@ -36,8 +36,10 @@ const show = computed({
 </script>
 
 <template>
-  <NModal v-model:show="show" :auto-focus="false"   	title="设置"
-preset="card" style="width: 95%; max-width: 500px">
+  <NModal
+    v-model:show="show" :auto-focus="false" title="设置"
+    preset="card" style="width: 95%; max-width: 500px"
+  >
     <div>
       <NTabs v-model:value="active" type="line" animated>
         <NTabPane name="General" tab="General">
@@ -58,7 +60,7 @@ preset="card" style="width: 95%; max-width: 500px">
             <Advanced />
           </div>
         </NTabPane>
-        <NTabPane name="Config" tab="Config">
+        <NTabPane v-if="false" name="Config" tab="Config">
           <template #tab>
             <SvgIcon class="text-lg" icon="ri:list-settings-line" />
             <span class="ml-2">{{ $t('setting.config') }}</span>
