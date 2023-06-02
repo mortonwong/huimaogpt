@@ -64,3 +64,15 @@ export function fetchVerify<T>(token: string) {
     data: { token },
   })
 }
+export function sendEmail<T>(email: string) {
+  return post<T>({
+    url: '/sendemail',
+    data: { email },
+  })
+}
+export function usercreate<T>(email: string,emailCode:string,userName:string,password:string) {
+  return post<T>({
+    url: '/usercreate',
+    data: { email,emailCode,userName,password },
+  })
+}

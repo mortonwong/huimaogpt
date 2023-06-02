@@ -20,3 +20,4 @@ export function sendResponse<T>(options: SendResponseOptions<T>) {
     status: options.type,
   })
 }
+

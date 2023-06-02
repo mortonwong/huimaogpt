@@ -6,6 +6,7 @@ import { SocksProxyAgent } from 'socks-proxy-agent'
 import httpsProxyAgent from 'https-proxy-agent'
 import fetch from 'node-fetch'
 import { sendResponse } from '../utils'
+import {getDefaultToken} from '../utils/mysql'
 import { isNotEmptyString } from '../utils/is'
 import type { ApiModel, ChatContext, ChatGPTUnofficialProxyAPIOptions, ModelConfig } from '../types'
 import type { RequestOptions, SetProxyOptions, UsageResponse } from './types'
@@ -46,37 +47,7 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
 (async () => {
   // More Info: https://github.com/transitive-bullshit/chatgpt-api
-  // 连接到数据库
-  await new Promise((resolve, reject) => {
-    connection.connect((err) => {
-      if (err) {
-        console.error(`error connecting: ${err.stack}`)
-        reject(err)
-        return
-      }
-      resolve()
-      console.log(`connected as id ${connection.threadId}`)
-    })
-  })
-
-  // 执行查询语句，并处理结果或错误
-  await new Promise((resolve, reject) => {
-    // 定义一个查询语句，从token表中取userid为0的token值
-    const query = 'SELECT token FROM token WHERE userid = 1'
-    connection.query(query, (error, results, fields) => {
-      if (error) {
-        console.log(error)
-        reject(err)
-      }
-      else {
-        console.log('数据库：', results[0].token) // 打印查询结果
-        Token = results[0].token
-        resolve(Token)
-
-        connection.end()
-      }
-    })
-  })
+  Token = await getDefaultToken()
   console.log('哈1', Token)
   if (isNotEmptyString(Token)) {
     const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
