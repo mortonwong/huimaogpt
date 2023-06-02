@@ -95,9 +95,9 @@ router.post('/sendemail', async (req, res) => {
     const { email } = req.body as { email: string }
     // 检验电子邮箱
     try {
-      const result = await sendSQL('SELECT * FROM user WHERE email = \'942422490@qq.com\';')
+      const result = await sendSQL(`SELECT * FROM user WHERE email = \'${email}\';`)
       console.log(result)
-      if (result) {
+      if ((result as any).length) {
         res.send({ status: 'Fail', message: '该邮箱已被注册' })
         return
       }
