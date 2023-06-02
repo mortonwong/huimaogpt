@@ -23,7 +23,6 @@ interface Props {
 const ms = useMessage()
 
 const loading = ref(false)
-const token = ref('')
 
 // const disabled = computed(() => !token.value.trim() || loading.value)
 
@@ -155,9 +154,9 @@ async function handleLogin() {
   try {
     loading.value = true
     const rs = await userlogin(loginUserName.value, loginPassword.value, loginNameType.value)
-    ms.success(`登录成功！${rs.userName}`)
+    ms.success(`登录成功！欢迎${(rs as any).userName}`)
     emits('canClose', true)
-    userStore.updateUserInfo({ name: rs.userName, isLogin: true, vip: 0 })
+    userStore.updateUserInfo({ name: (rs as any).userName, isLogin: true, vip: 0 })
   }
   catch (error: any) {
     ms.error(error.message ?? 'error')
