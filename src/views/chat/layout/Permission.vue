@@ -168,7 +168,7 @@ async function handleLogin() {
 </script>
 
 <template>
-  <NModal :show="visible" style="width: 90%; max-width: 380px">
+  <NModal :show="visible" :auto-focus="false" style="width: 90%; max-width: 380px">
     <div class="p-10 bg-white rounded dark:bg-slate-800">
       <div class="space-y-4">
         <header class="space-y-2" style="position: relative;">
@@ -188,7 +188,7 @@ async function handleLogin() {
           >
             🤖以继续免费和我对话<br>
           </p>
-          <NInput v-model:value="email" type="text" size="large" placeholder="请输入电子邮箱,如xxx@xxx.xxx" @keypress="handleRegisterStep1Press">
+          <NInput v-model:value="email" type="text" size="large" :autofocus="false" placeholder="请输入电子邮箱,如xxx@xxx.xxx" @keypress="handleRegisterStep1Press">
             <template #prefix>
               Email
             </template>
