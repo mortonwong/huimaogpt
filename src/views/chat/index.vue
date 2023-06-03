@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import type { Ref } from 'vue'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { NAutoComplete, NButton, NInput, useDialog, useMessage } from 'naive-ui'
@@ -13,7 +13,7 @@ import HeaderComponent from './components/Header/index.vue'
 import Permission from './layout/Permission.vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useChatStore, usePromptStore, useUserStore } from '@/store'
+import { useChatStore, usePromptStore, useSettingStore, useUserStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 
@@ -42,7 +42,20 @@ const conversationList = computed(() => dataSources.value.filter(item => (!item.
 const prompt = ref<string>('')
 const loading = ref<boolean>(false)
 const inputRef = ref<Ref | null>(null)
+const settingStore = useSettingStore()
+const showLogin = ref(false)
 
+watch(
+  () => settingStore.showModal,
+  (change, oldval) => {
+    if (change && !oldval) {
+      showLogin.value = true
+
+      settingStore.updateSetting({ showModal: false, modalType: 'login' })
+    }
+  },
+  { immediate: true },
+)
 // 添加PromptStore
 const promptStore = usePromptStore()
 
@@ -470,7 +483,6 @@ onUnmounted(() => {
     controller.abort()
 })
 
-const showLogin = ref(false)
 function handleRegister() {
   showLogin.value = false
 }

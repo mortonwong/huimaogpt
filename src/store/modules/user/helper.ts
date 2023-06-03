@@ -19,7 +19,7 @@ export function defaultSetting(): UserState {
     userInfo: {
       avatar: 'http://chat.huimao.fun/avatar.jpg',
       name: '知潮GPT',
-      description: '免费ChatGPT镜像站',
+      description: '畅享免费无限次数',
       isLogin: false,
     },
   }

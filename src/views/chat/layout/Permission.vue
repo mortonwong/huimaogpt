@@ -1,16 +1,26 @@
 <!-- eslint-disable max-statements-per-line -->
 <script setup lang='ts'>
-import { defineEmits, ref } from 'vue'
+import { defineEmits, ref, watch } from 'vue'
 import { NButton, NInput, NModal, useMessage } from 'naive-ui'
 import { sendEmail, usercreate, userlogin } from '@/api'
-import { useUserStore } from '@/store'
+import { useSettingStore, useUserStore } from '@/store'
 
 defineProps<Props>()
 
 const emits = defineEmits(['canClose'])
 
 const userStore = useUserStore()
+const settingStore = useSettingStore()
+const pageState = ref('register_step1') // register_step1 \ resgiter_step2 \ login \ change_password
 
+watch(
+  () => settingStore.modalType,
+  (change, oldval) => {
+    if (change)
+      pageState.value = change
+  },
+  { immediate: true },
+)
 // import { useAuthStore } from '@/store'
 // import Icon403 from '@/icons/403.vue'
 
@@ -66,7 +76,6 @@ const emailCode = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
 const userName = ref('')
-const pageState = ref('register_step1') // register_step1 \ resgiter_step2 \ login \ change_password
 const SCC = ref('')
 async function handleEmailSubmit() {
   if (!email.value) {
@@ -129,8 +138,8 @@ async function handleRegister() {
     loading.value = false
   }
 }
-function handleLoginState() {
-  pageState.value = 'login'
+function handleLoginState(state: string) {
+  pageState.value = state
 }
 const loginUserName = ref('')
 const loginPassword = ref('')
@@ -165,10 +174,13 @@ async function handleLogin() {
     loading.value = false
   }
 }
+function handleMaskClick() {
+  emits('canClose', true)
+}
 </script>
 
 <template>
-  <NModal :show="visible" :auto-focus="false" style="width: 90%; max-width: 380px">
+  <NModal :show="visible" :auto-focus="false" style="width: 90%; max-width: 380px" @mask-click="handleMaskClick">
     <div class="p-10 bg-white rounded dark:bg-slate-800">
       <div class="space-y-4">
         <header class="space-y-2" style="position: relative;">
@@ -195,7 +207,7 @@ async function handleLogin() {
           </NInput>
 
           <div style="text-align: right;font-size: 0.8rem;">
-            <a style="cursor: pointer;" @click="handleLoginState">已有账号，立即登录-></a>
+            <a style="cursor: pointer;" @click="handleLoginState('login')">已有账号，立即登录-></a>
           </div>
           <NButton
             block color="#8a2be2" size="large" :loading="loading" style="margin-top: 15px;background: linear-gradient(327deg, rgb(97 115 255) 10.79%, rgb(239 27 225) 87.08%);opacity: 1;"
@@ -243,7 +255,7 @@ async function handleLogin() {
             class="text-base text-center text-slate-500 dark:text-slate-500"
             style="font-size: 0.9rem; letter-spacing: 0.8px; font-weight: 600;margin-top: 4px;"
           >
-            🎉仅剩一步！即将免费和我对话~<br>
+            🎉仅剩一步！即将和我对话~<br>
           </p>
           <NInput v-model:value="loginUserName" size="large" placeholder="请输入用户名或Email" @keypress="handleRegisterStep2Press">
             <template #prefix>
@@ -255,6 +267,9 @@ async function handleLogin() {
               密码
             </template>
           </NInput>
+          <div style="text-align: right;font-size: 0.8rem;">
+            <a style="cursor: pointer;" @click="handleLoginState('register_step1')">没有账号，立即注册-></a>
+          </div>
           <NButton
             block color="#8a2be2" size="large" :loading="loading" style="margin-top: 20px;background: linear-gradient(327deg, rgb(97 115 255) 10.79%, rgb(239 27 225) 87.08%);opacity: 1;"
             @click="handleLogin"
