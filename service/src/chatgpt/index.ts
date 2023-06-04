@@ -5,14 +5,13 @@ import { ChatGPTAPI, ChatGPTUnofficialProxyAPI } from 'chatgpt'
 import { SocksProxyAgent } from 'socks-proxy-agent'
 import httpsProxyAgent from 'https-proxy-agent'
 import fetch from 'node-fetch'
+import mysql from 'mysql'
 import { sendResponse } from '../utils'
-import {getDefaultToken} from '../utils/mysql'
+import { getDefaultToken } from '../utils/mysql'
 import { isNotEmptyString } from '../utils/is'
 import type { ApiModel, ChatContext, ChatGPTUnofficialProxyAPIOptions, ModelConfig } from '../types'
 import type { RequestOptions, SetProxyOptions, UsageResponse } from './types'
 const { HttpsProxyAgent } = httpsProxyAgent
-import mysql from 'mysql'
-
 
 // 引入mysql模块
 
@@ -119,7 +118,6 @@ async function chatReplyProcess(options: RequestOptions) {
         process?.(partialResponse)
       },
     })
-
     return sendResponse({ type: 'Success', data: response })
   }
   catch (error: any) {
