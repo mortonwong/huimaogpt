@@ -1,13 +1,15 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
+import { computed, ref,defineAsyncComponent  } from 'vue'
 import { NDropdown, useMessage } from 'naive-ui'
 import AvatarComponent from './Avatar.vue'
-import TextComponent from './Text.vue'
+// import TextComponent from ''
 import { SvgIcon } from '@/components/common'
 import { useIconRender } from '@/hooks/useIconRender'
 import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { copyToClip } from '@/utils/copy'
+
+const TextComponent = defineAsyncComponent(() => import('./Text.vue'));
 
 interface Props {
   dateTime?: string
@@ -112,7 +114,8 @@ async function handleCopy() {
         class="flex items-end gap-1 mt-2"
         :class="[inversion ? 'flex-row-reverse' : 'flex-row']"
       >
-        <TextComponent
+        <component
+          :is="TextComponent"
           ref="textRef"
           :inversion="inversion"
           :error="error"
