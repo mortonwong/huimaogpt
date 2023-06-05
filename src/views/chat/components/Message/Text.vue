@@ -3,7 +3,10 @@ import { computed, onMounted, onUnmounted, onUpdated, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import mdKatex from '@traptitech/markdown-it-katex'
 import mila from 'markdown-it-link-attributes'
-import hljs from 'highlight.js'
+// import hljs from 'highlight.js'
+// @ts-ignore
+import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/+esm'
+
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
 import { copyToClip } from '@/utils/copy'
