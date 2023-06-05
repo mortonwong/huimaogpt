@@ -3,22 +3,12 @@ import { computed, onMounted, onUnmounted, onUpdated, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import mdKatex from '@traptitech/markdown-it-katex'
 import mila from 'markdown-it-link-attributes'
-// import hljs, { HLJSApi } from 'highlight.js'
-
+import hljs from 'highlight.js'
 
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
 import { copyToClip } from '@/utils/copy'
 
-let hljs: any;
-
-async function loadHljs() {
-  if (!hljs) {
-    // Dynamic import highlight.js module
-    const { default: hljsModule } = await import('highlight.js');
-    hljs = hljsModule;
-  }
-}
 
 interface Props {
   inversion?: boolean
@@ -33,7 +23,6 @@ const props = defineProps<Props>()
 const { isMobile } = useBasicLayout()
 
 const textRef = ref<HTMLElement>()
-  setTimeout(loadHljs, 1000);
 
 const mdi = new MarkdownIt({
   html: false,
