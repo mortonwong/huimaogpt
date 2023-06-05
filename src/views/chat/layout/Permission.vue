@@ -150,7 +150,7 @@ async function handleLogin() {
     return
   }
   if (isValidEmail(loginUserName.value)) { loginNameType.value = 'email' }
-  else if (/^[a-zA-Z0-9_\-.u4e00-\u9FA5]+$/.test(loginUserName.value) && (loginUserName.value.length < 2 || loginUserName.value.length > 20)) { loginNameType.value = 'username' }
+  else if (/^[a-zA-Z0-9_\-.u4e00-\u9FA5]+$/.test(loginUserName.value) || (loginUserName.value.length < 2 || loginUserName.value.length > 20)) { loginNameType.value = 'username' }
   else {
     ms.error('账号格式错误，请输入用户名或Email')
     return
