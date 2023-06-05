@@ -162,7 +162,7 @@ router.post('/userlogin', async (req: Request, res: Response) => {
     res.send({ status: 'Success', message: '登录成功', userName: result[0].username })
 
   else
-    res.status(500).send({ status: 'Fail', message: '登录失败' })
+    res.status(500).send({ status: 'Fail', message: '登录验证失败，请尝试重新输入' })
 })
 
 app.use('', router)
