@@ -77,6 +77,7 @@ function handleSubmit() {
     onConversation()
 }
 
+
 async function onConversation() {
   let message = prompt.value
 
@@ -476,6 +477,17 @@ onMounted(() => {
   scrollToBottom()
   if (inputRef.value && !isMobile.value)
     inputRef.value?.focus()
+  setTimeout(() => {
+  if(getChatData()[0].data.length==0)
+    addChat(+uuid,{
+      dateTime: new Date().toLocaleString(),
+      text: '很高兴再次见到你，我是知潮GPT，有什么问题需要解决吗？',
+      inversion: false,
+      error: false,
+      conversationOptions: null,
+      requestOptions: { prompt: 'eeeeeeeee', options: null },
+    },)
+}, 2000);
 })
 
 onUnmounted(() => {
