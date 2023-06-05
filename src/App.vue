@@ -27,7 +27,7 @@ const { isMobile } = useBasicLayout()
           style="font-weight: 600; color:#fff;text-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);"
         >🤖知潮GPT</span><span
           style="color: rgb(201, 209, 217); font-size: 0.6rem;"
-        >&nbsp;-&nbsp;稳定好用的ChatGPT镜像站(chat.humaoi.fun)</span>
+        >&nbsp;-&nbsp;免费就能用的GPT-AI聊天(chat.huimao.fun)</span>
       </h1>
     </header>
     <NaiveProvider>
