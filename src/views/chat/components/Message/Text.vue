@@ -9,13 +9,13 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
 import { copyToClip } from '@/utils/copy'
 
-
 interface Props {
   inversion?: boolean
   error?: boolean
   text?: string
   loading?: boolean
   asRawText?: boolean
+  showTooLong?: boolean
 }
 
 const props = defineProps<Props>()
@@ -114,12 +114,21 @@ onUnmounted(() => {
       </div>
       <div v-else class="whitespace-pre-wrap" v-text="text" />
       <template v-if="loading">
-        <span class="dark:text-white w-[4px] h-[20px] block animate-blink" />
+        <span class="dark:text-white w-[4px] h-[20px] block animate-blink" style="color: #f0a020;display: inline-block;" />
+        <span
+          v-if="showTooLong"
+          style="color: rgb(180 180 180);
+            font-size: 0.9rem;
+            position: relative;
+            top: -5px;
+            left: 5px;
+            "
+        >内容可能有点长，思考中……</span>
       </template>
     </div>
   </div>
 </template>
 
 <style lang="less">
-@import url(./style.less);
+          @import url(./style.less);
 </style>

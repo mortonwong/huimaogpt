@@ -24,7 +24,7 @@ export const useChatStore = defineStore('chat-store', {
 
   actions: {
     getChatData() {
-      return this.chat;
+      return this.chat
     },
     setUsingContext(context: boolean) {
       this.usingContext = context

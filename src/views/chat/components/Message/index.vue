@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, ref,defineAsyncComponent  } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 import { NDropdown, useMessage } from 'naive-ui'
 import AvatarComponent from './Avatar.vue'
 // import TextComponent from ''
@@ -9,7 +9,11 @@ import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { copyToClip } from '@/utils/copy'
 
-const TextComponent = defineAsyncComponent(() => import('./Text.vue'));
+const props = defineProps<Props>()
+
+const emit = defineEmits<Emit>()
+
+const TextComponent = defineAsyncComponent(() => import('./Text.vue'))
 
 interface Props {
   dateTime?: string
@@ -17,16 +21,14 @@ interface Props {
   inversion?: boolean
   error?: boolean
   loading?: boolean
+  showTooLong?: boolean
+
 }
 
 interface Emit {
   (ev: 'regenerate'): void
   (ev: 'delete'): void
 }
-
-const props = defineProps<Props>()
-
-const emit = defineEmits<Emit>()
 
 const { isMobile } = useBasicLayout()
 
@@ -121,6 +123,7 @@ async function handleCopy() {
           :error="error"
           :text="text"
           :loading="loading"
+          :show-too-long="showTooLong"
           :as-raw-text="asRawText"
           :class="[inversion ? 'mySay' : 'gptSay']"
         />

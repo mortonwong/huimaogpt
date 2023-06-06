@@ -77,7 +77,6 @@ function handleSubmit() {
     onConversation()
 }
 
-
 async function onConversation() {
   let message = prompt.value
 
@@ -128,6 +127,7 @@ async function onConversation() {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
+      let tooLong
       await fetchChatAPIProcess<Chat.ConversationResponse>({
         prompt: message,
         options,
@@ -155,7 +155,9 @@ async function onConversation() {
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
-
+            tooLong = setTimeout(() => {
+              updateChatSome(+uuid, dataSources.value.length - 1, { showTooLong: true })
+            }, 4500)
             if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
               options.parentMessageId = data.id
               lastText = data.text
@@ -170,7 +172,8 @@ async function onConversation() {
           }
         },
       })
-      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+      clearTimeout(tooLong)
+      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false, showTooLong: false })
     }
 
     await fetchChatAPIOnce()
@@ -478,16 +481,17 @@ onMounted(() => {
   if (inputRef.value && !isMobile.value)
     inputRef.value?.focus()
   setTimeout(() => {
-  if(getChatData()[0].data.length==0)
-    addChat(+uuid,{
-      dateTime: new Date().toLocaleString(),
-      text: '很高兴再次见到你，我是知潮GPT，有什么问题需要解决吗？',
-      inversion: false,
-      error: false,
-      conversationOptions: null,
-      requestOptions: { prompt: 'eeeeeeeee', options: null },
-    },)
-}, 2000);
+    if (getChatData()[0].data.length == 0) {
+      addChat(+uuid, {
+        dateTime: new Date().toLocaleString(),
+        text: '很高兴再次见到你，我是知潮GPT，有什么问题需要解决吗？',
+        inversion: false,
+        error: false,
+        conversationOptions: null,
+        requestOptions: { prompt: 'eeeeeeeee', options: null },
+      })
+    }
+  }, 2000)
 })
 
 onUnmounted(() => {
@@ -544,6 +548,7 @@ function checkPermission() {
                 :inversion="item.inversion"
                 :error="item.error"
                 :loading="item.loading"
+                :show-too-long="item.showTooLong"
                 @regenerate="onRegenerate(index)"
                 @delete="handleDelete(index)"
               />
@@ -565,7 +570,7 @@ function checkPermission() {
         <div class="flex items-center justify-between space-x-2">
           <HoverButton @click="handleClear">
             <span class="text-xl text-[#4f555e] dark:text-white">
-              <SvgIcon icon="ri:delete-bin-line" />
+              <SvgIcon icon="carbon:clean" />
             </span>
           </HoverButton>
           <HoverButton v-if="!isMobile" @click="handleExport">

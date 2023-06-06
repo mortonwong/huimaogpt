@@ -62,8 +62,8 @@ function isActive(uuid: number) {
       <template v-else>
         <div v-for="(item, index) of dataSources" :key="index">
           <a
-            class="relative flex items-center gap-3 px-3 py-3 break-all border rounded-md cursor-pointer hover:bg-neutral-100 group dark:border-neutral-800 dark:hover:bg-[#24272e]"
-            :class="isActive(item.uuid) && ['border-[#154EC1]', 'bg-neutral-100', 'text-[#154EC1]', 'dark:bg-[#154EC1]', 'dark:border-[#154EC1]', 'pr-14']"
+            class="relative flex items-center gap-3 px-3 py-3 break-all border cursor-pointer group leftScrollButton"
+            :class="isActive(item.uuid) && ['pr-14', 'leftScrollButtonActive']"
             @click="handleSelect(item)"
           >
             <span>
@@ -103,3 +103,24 @@ function isActive(uuid: number) {
     </div>
   </NScrollbar>
 </template>
+
+<style>
+.leftScrollButton:hover{
+  background:#d3dcec;
+}
+.leftScrollButton{
+  background: #dee2ea;
+    border: solid 1px transparent;
+    border-radius: 16px;
+    transition: background 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+}
+.leftScrollButtonActive:hover{
+  background: #418cff;
+
+}
+.leftScrollButtonActive{
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0.3px 0.9px, rgba(0, 0, 0, 0.16) 0px 1.6px 3.6px;
+  background:#3b7ff2;
+  color: #fff;
+}
+</style>
