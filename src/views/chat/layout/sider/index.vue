@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { NButton, NLayoutSider } from 'naive-ui'
+import { NButton, NLayoutSider, NModal } from 'naive-ui'
 import List from './List.vue'
 import Footer from './Footer.vue'
 import { useAppStore, useChatStore } from '@/store'
@@ -55,6 +55,7 @@ watch(
     flush: 'post',
   },
 )
+const wxshow = ref(false)
 </script>
 
 <template>
@@ -80,8 +81,13 @@ watch(
         <div class="flex-1 min-h-0 pb-4 overflow-hidden">
           <List />
         </div>
-        <div class="p-4">
-          <NButton block @click="show = true">
+        <div class="leftBottomButton">
+          <NButton block secondary type="primary" @click="wxshow = true">
+            加入微信群
+          </NButton>
+        </div>
+        <div class="leftBottomButton">
+          <NButton block secondary type="primary" @click="show = true">
             {{ $t('store.siderButton') }}
           </NButton>
         </div>
@@ -93,6 +99,10 @@ watch(
     <div v-show="!collapsed" class="fixed inset-0 z-40 w-full h-full bg-black/40" @click="handleUpdateCollapsed" />
   </template>
   <PromptStore v-model:visible="show" />
+  <NModal v-model:show="wxshow" style="width: 90%; max-width: 500px;text-align: center;" preset="card">
+    请扫描下方二维码<br>添加客服加入微信交流群
+    <img src="/public/wxcode.jpg">
+  </NModal>
 </template>
 
 <style>
@@ -100,5 +110,8 @@ watch(
   border-radius: 10px;
     box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
     margin: 3px;
+}
+.leftBottomButton{
+  padding:1rem 1rem 0rem;
 }
 </style>

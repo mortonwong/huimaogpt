@@ -127,7 +127,7 @@ async function onConversation() {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      let tooLong
+      let tooLong: any
       await fetchChatAPIProcess<Chat.ConversationResponse>({
         prompt: message,
         options,
@@ -155,9 +155,12 @@ async function onConversation() {
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
+            updateChatSome(+uuid, dataSources.value.length - 1, { showTooLong: false })
+            clearTimeout(tooLong)
             tooLong = setTimeout(() => {
               updateChatSome(+uuid, dataSources.value.length - 1, { showTooLong: true })
-            }, 4500)
+              console.log('long')
+            }, 2500)
             if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
               options.parentMessageId = data.id
               lastText = data.text
@@ -172,8 +175,7 @@ async function onConversation() {
           }
         },
       })
-      clearTimeout(tooLong)
-      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false, showTooLong: false })
+      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
     }
 
     await fetchChatAPIOnce()
