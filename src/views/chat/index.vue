@@ -493,7 +493,7 @@ onMounted(() => {
         requestOptions: { prompt: 'eeeeeeeee', options: null },
       })
     }
-  }, 2000)
+  }, 100)
 })
 
 onUnmounted(() => {
