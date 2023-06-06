@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, onUpdated, ref } from 'vue'
+import { computed, defineEmits, onMounted, onUnmounted, onUpdated, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import mdKatex from '@traptitech/markdown-it-katex'
 import mila from 'markdown-it-link-attributes'
@@ -19,6 +19,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const emit = defineEmits<Emit>()
 
 const { isMobile } = useBasicLayout()
 
@@ -91,8 +93,12 @@ function removeCopyEvents() {
     })
   }
 }
+interface Emit {
+  (ev: 'load'): void
+}
 
 onMounted(() => {
+  emit('load')
   addCopyEvents()
 })
 

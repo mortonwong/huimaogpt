@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { computed, defineAsyncComponent, ref } from 'vue'
-import { NDropdown, useMessage } from 'naive-ui'
+import { NDropdown, NSkeleton, useMessage } from 'naive-ui'
 import AvatarComponent from './Avatar.vue'
 // import TextComponent from ''
 import { SvgIcon } from '@/components/common'
@@ -94,6 +94,10 @@ async function handleCopy() {
     message.error('复制失败')
   }
 }
+const showSkeleton = ref(true)
+function closeSkeleton() {
+  showSkeleton.value = false
+}
 </script>
 
 <template>
@@ -126,7 +130,9 @@ async function handleCopy() {
           :show-too-long="showTooLong"
           :as-raw-text="asRawText"
           :class="[inversion ? 'mySay' : 'gptSay']"
+          @load="closeSkeleton"
         />
+        <NSkeleton v-if="showSkeleton" height="40px" round />
         <div class="flex flex-col">
           <button
             v-if="!inversion"
