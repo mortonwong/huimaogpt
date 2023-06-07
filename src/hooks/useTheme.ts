@@ -39,5 +39,5 @@ export function useTheme() {
     { immediate: true },
   )
 
-  return { theme, themeOverrides }
+  return { theme, themeOverrides,isDark }
 }

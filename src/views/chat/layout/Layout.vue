@@ -26,7 +26,6 @@ const getMobileClass = computed(() => {
 const getContainerClass = computed(() => {
   return [
     'h-full',
-    { 'pl-[260px]': !isMobile.value && !collapsed.value },
   ]
 })
 // const ms = useMessage()
@@ -59,7 +58,7 @@ function changeNav() {
       文档Chat
     </div>
   </header>
-  <div class="h-full dark:bg-[#24272e] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
+  <div class="h-full dark:bg-[#1f2121] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
     <div class="h-full overflow-hidden" :class="[isMobile ? getMobileClass : 'pcFrame']">
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider style="background-color: transparent;">
         <Sider />

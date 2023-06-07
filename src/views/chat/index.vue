@@ -531,7 +531,7 @@ function checkPermission() {
       <div id="scrollRef" ref="scrollRef" class="h-full overflow-hidden overflow-y-auto">
         <div
           id="image-wrapper"
-          class="w-full max-w-screen-xl m-auto dark:bg-[#101014]"
+          class="w-full max-w-screen-xl m-auto"
           :class="[isMobile ? 'p-2' : 'p-4']"
         >
           <template v-if="!dataSources.length">
@@ -580,11 +580,11 @@ function checkPermission() {
               <SvgIcon icon="ri:download-2-line" />
             </span>
           </HoverButton>
-          <HoverButton v-if="!isMobile" @click="toggleUsingContext">
+          <!-- <HoverButton v-if="!isMobile" @click="toggleUsingContext">
             <span class="text-xl" :class="{ 'text-[#154EC1]': usingContext, 'text-[#a8071a]': !usingContext }">
               <SvgIcon icon="ri:chat-history-line" />
             </span>
-          </HoverButton>
+          </HoverButton> -->
           <NAutoComplete v-model:value="prompt" :options="searchOptions" :render-label="renderOption">
             <template #default="{ handleInput, handleBlur, handleFocus }">
               <NInput
@@ -602,11 +602,12 @@ function checkPermission() {
             </template>
           </NAutoComplete>
           <NButton
+            id="sendButton"
             type="primary" style="    padding: 21px 12px;
     border-radius: 21px;" @click="handleSubmit"
           >
             <template #icon>
-              <span class="dark:text-black">
+              <span class="text-white">
                 <SvgIcon icon="ri:send-plane-fill" />
               </span>
             </template>
@@ -617,3 +618,12 @@ function checkPermission() {
     </footer>
   </div>
 </template>
+
+<style>
+.n-button__border{
+  display: none;
+}
+#sendButton{
+  background: linear-gradient(134deg, #5da2ee 5.79%, #1b4aef 95.08%)
+}
+</style>

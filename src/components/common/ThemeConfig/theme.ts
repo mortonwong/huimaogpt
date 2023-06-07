@@ -1,6 +1,6 @@
 import type { GlobalThemeOverrides } from 'naive-ui'
 const blue: any = {
-  normal: '#154EC1',
+  normal: '#3b7ff2',
   hover: '#3868c9',
   pressed: '#1749ad',
 }

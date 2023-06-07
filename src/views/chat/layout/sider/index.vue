@@ -7,6 +7,9 @@ import Footer from './Footer.vue'
 import { useAppStore, useChatStore } from '@/store'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { PromptStore } from '@/components/common'
+import { useTheme } from '@/hooks/useTheme'
+
+const { isDark } = useTheme()
 
 const appStore = useAppStore()
 const chatStore = useChatStore()
@@ -33,7 +36,7 @@ const getMobileClass = computed<CSSProperties>(() => {
       zIndex: 50,
     }
   }
-  return {}
+  return { }
 })
 
 const mobileSafeArea = computed(() => {
@@ -55,6 +58,7 @@ watch(
     flush: 'post',
   },
 )
+
 const wxshow = ref(false)
 </script>
 
@@ -65,10 +69,9 @@ const wxshow = ref(false)
     :width="260"
     :show-trigger="isMobile ? false : 'arrow-circle'"
     collapse-mode="transform"
-    position="absolute"
-    bordered
-    :style="`${getMobileClass};background-color: #f7f9fd;z-index:41;`"
-    class="mySider z-45"
+    :position="isMobile ? 'absolute' : 'static'"
+    :style="`${getMobileClass};z-index:41;background-color:${isDark ? '#232525' : '#f7f9fd'}`"
+    class="mySider"
     @update-collapsed="handleUpdateCollapsed"
   >
     <div class="flex flex-col h-full" :style="mobileSafeArea">
@@ -112,6 +115,9 @@ const wxshow = ref(false)
     margin: 3px;
 }
 .leftBottomButton{
-  padding:1rem 1rem 0rem;
+  padding:0rem 1rem 1rem;
+}
+.n-layout-sider__border{
+  background-color:red
 }
 </style>
