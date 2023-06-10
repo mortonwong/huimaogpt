@@ -38,7 +38,7 @@ function changeNav() {
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-30 flex items-center header-content"
-    style="display: flex; height: 42px; line-height: 42px;flex-direction: row;  background: linear-gradient(70deg, rgb(37 36 40) 10.79%, #06083e 72.08%); z-index: 999;justify-content: center;"
+    style="display: flex; height: 37px; line-height: 37px;flex-direction: row;  background: linear-gradient(70deg, rgb(37 36 40) 10.79%, #06083e 72.08%); z-index: 999;justify-content: center;"
   >
     <h1 style="color: rgb(51, 51, 51); letter-spacing: 1px;margin-right: 11px;">
       <span

@@ -29,7 +29,7 @@ watch(
   />
   <NConfigProvider
     class="h-full" :theme="theme" :theme-overrides="themeOverrides" :locale="language"
-    :style="[isMobile ? 'padding: 32px 0px 0px;' : 'padding: 32px 10% 0px;']"
+    :style="[isMobile ? 'padding: 37px 0px 0px;' : 'padding: 32px 10% 0px;']"
   >
     <NaiveProvider>
       <RouterView />

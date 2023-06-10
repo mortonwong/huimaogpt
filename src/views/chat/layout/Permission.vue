@@ -257,12 +257,12 @@ function handleMaskClick() {
           >
             🎉仅剩一步！即将和我对话~<br>
           </p>
-          <NInput v-model:value="loginUserName" size="large" placeholder="请输入用户名或Email" @keypress="handleRegisterStep2Press">
+          <NInput v-model:value="loginUserName" size="large" placeholder="请输入用户名或Email" @keypress="handleLogin">
             <template #prefix>
               账号
             </template>
           </NInput>
-          <NInput v-model:value="loginPassword" size="large" type="password" placeholder="请输入密码" @keypress="handleRegisterStep2Press">
+          <NInput v-model:value="loginPassword" size="large" type="password" placeholder="请输入密码" @keypress="handleLogin">
             <template #prefix>
               密码
             </template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, nextTick } from 'vue'
-import { HoverButton, SvgIcon } from '@/components/common'
+import { SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
 
 interface Props {
@@ -43,9 +43,9 @@ function toggleUsingContext() {
 
 <template>
   <header
-    class="sticky top-0 left-0 right-0 z-30 border-b dark:border-neutral-800 bg-white/80 dark:bg-black/20 backdrop-blur"
+    class="mheader sticky top-0 left-0 right-0 z-30 dark:border-neutral-800 bg-white/80 dark:bg-[#000000b8] backdrop-blur"
   >
-    <div class="relative flex items-center justify-between min-w-0 overflow-hidden h-14">
+    <div class="relative flex items-center justify-between min-w-0 overflow-hidden h-11">
       <div class="flex items-center">
         <button
           class="flex items-center justify-center w-11 h-11"
@@ -61,7 +61,7 @@ function toggleUsingContext() {
       >
         {{ currentChatHistory?.title ?? '' }}
       </h1>
-      <div class="flex items-center space-x-2">
+      <!-- <div class="flex items-center space-x-2">
         <HoverButton @click="toggleUsingContext">
           <span class="text-xl" :class="{ 'text-[#154EC1]': usingContext, 'text-[#a8071a]': !usingContext }">
             <SvgIcon icon="ri:chat-history-line" />
@@ -72,7 +72,17 @@ function toggleUsingContext() {
             <SvgIcon icon="ri:download-2-line" />
           </span>
         </HoverButton>
-      </div>
+      </div> -->
     </div>
   </header>
 </template>
+
+<style>
+.mheader{
+  backdrop-filter: blur(39px);
+    position: absolute;
+    background: #ffffff82;
+    border-bottom: solid 1px #e5e7eb91;
+    box-shadow: 2px -1px 6px 0px #0000001f;
+}
+</style>
