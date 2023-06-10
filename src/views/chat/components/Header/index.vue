@@ -7,14 +7,14 @@ interface Props {
   usingContext: boolean
 }
 
-interface Emit {
-  (ev: 'export'): void
-  (ev: 'toggleUsingContext'): void
-}
+// interface Emit {
+//   (ev: 'export'): void
+//   (ev: 'toggleUsingContext'): void
+// }
 
 defineProps<Props>()
 
-const emit = defineEmits<Emit>()
+// const emit = defineEmits<Emit>()
 
 const appStore = useAppStore()
 const chatStore = useChatStore()
@@ -32,13 +32,13 @@ function onScrollToTop() {
     nextTick(() => scrollRef.scrollTop = 0)
 }
 
-function handleExport() {
-  emit('export')
-}
+// function handleExport() {
+//   emit('export')
+// }
 
-function toggleUsingContext() {
-  emit('toggleUsingContext')
-}
+// function toggleUsingContext() {
+//   emit('toggleUsingContext')
+// }
 </script>
 
 <template>
