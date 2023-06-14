@@ -114,7 +114,7 @@ function closeSkeleton() {
     </div>
     <div class="text-base relative" :class="[inversion ? 'items-end' : 'items-start']">
       <div style="display: flex;align-items: baseline;">
-        <p v-if="inversion" class="retrytypemy">
+        <p v-if="false && inversion" class="retrytypemy">
           <span>重试&nbsp&nbsp</span>
           <span>复制&nbsp&nbsp</span>
           <span>原文&nbsp&nbsp</span>
@@ -123,7 +123,7 @@ function closeSkeleton() {
         <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
           {{ dateTime }}
         </p>
-        <p v-if="!inversion" class="retrytype">
+        <p v-if="false && !inversion" class="retrytype">
           <span>重试&nbsp&nbsp</span>
           <span>复制&nbsp&nbsp</span>
           <span>原文&nbsp&nbsp</span>
