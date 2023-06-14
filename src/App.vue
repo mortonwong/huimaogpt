@@ -9,6 +9,7 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 const { theme, isDark } = useTheme()
 const { language } = useLanguage()
 const { isMobile } = useBasicLayout()
+
 watch(
   () => isDark.value,
   (dark) => {
@@ -23,13 +24,13 @@ watch(
 
 <template>
   <div
-    v-if="!isDark" class="image" style="background-image: url(https://www.bing.com/cdx/bg-sprite.png); background-position: 0% 20%; opacity: 1;    position: fixed;
+    v-if="!isDark" class="image" style="background-image: url(/bg.png); opacity: 1;background-size: cover;    position: fixed;
           height: 100vh;
           width: 100vw;"
   />
   <NConfigProvider
     class="h-full" :theme="theme" :theme-overrides="themeOverrides" :locale="language"
-    :style="[isMobile ? 'padding: 37px 0px 0px;' : 'padding: 32px 10% 0px;']"
+    :style="[isMobile ? 'padding: 37px 0px 0px;' : 'padding: 42px 10% 10px;']"
   >
     <NaiveProvider>
       <RouterView />

@@ -103,7 +103,7 @@ function closeSkeleton() {
 <template>
   <div
     ref="messageRef"
-    class="flex w-full mb-6 overflow-hidden"
+    class="flex w-full mb-6 overflow-hidden messagemy"
     :class="[{ 'flex-row-reverse': inversion }]"
   >
     <div
@@ -112,10 +112,24 @@ function closeSkeleton() {
     >
       <AvatarComponent :image="inversion" />
     </div>
-    <div class="overflow-hidden text-base " :class="[inversion ? 'items-end' : 'items-start']">
-      <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
-        {{ dateTime }}
-      </p>
+    <div class="text-base relative" :class="[inversion ? 'items-end' : 'items-start']">
+      <div style="display: flex;align-items: baseline;">
+        <p v-if="inversion" class="retrytypemy">
+          <span>重试&nbsp&nbsp</span>
+          <span>复制&nbsp&nbsp</span>
+          <span>原文&nbsp&nbsp</span>
+          <span>删除</span>
+        </p>
+        <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
+          {{ dateTime }}
+        </p>
+        <p v-if="!inversion" class="retrytype">
+          <span>重试&nbsp&nbsp</span>
+          <span>复制&nbsp&nbsp</span>
+          <span>原文&nbsp&nbsp</span>
+          <span>删除</span>
+        </p>
+      </div>
       <div
         class="flex items-end gap-1 mt-2"
         :class="[inversion ? 'flex-row-reverse' : 'flex-row']"
@@ -137,6 +151,7 @@ function closeSkeleton() {
           <button
             v-if="!inversion"
             class="mb-2 transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-300"
+            title="重新回答"
             @click="handleRegenerate"
           >
             <SvgIcon icon="ri:restart-line" />
@@ -164,15 +179,57 @@ function closeSkeleton() {
     border-radius: 10px;
     margin: 3px;
     transition: box-shadow 0.2s ease;
+  box-shadow: 0px 1px 3px rgb(6 6 6 / 24%)
+}
+.mySay .whitespace-pre-wrap::selection{
+  background: #e9ecf5;
+    color: #1c2853;
 }
 .gptSay{
-  border-radius: 0 10px 10px 10px;
+  border-radius: 10px;
     position: relative;
     margin: 3px;
-    background: #ebeff6;
+    background: #f6f8fa;
     transition: box-shadow 0.2s ease;
+    border:solid 1px #e7e7f3;
+
 }
 .gptSay:hover,.mySay:hover{
-  box-shadow: 0px 1px 3px rgb(6 6 6 / 24%)
+  box-shadow: 0px 0px 0px rgb(6 6 6 / 10%)
+}
+.retrytype{
+  opacity: 0;
+    font-size: 8px;
+    transition: all 0.3s ease;
+    color:#303030;
+    cursor: pointer;
+    margin-left: 20px;
+  left: 1px;
+    position:relative;
+}
+
+.retrytypemy{
+  opacity: 0;
+    font-size: 8px;
+    transition: all 0.3s ease;
+    color:#303030;
+    cursor: pointer;
+    margin-right: 20px;
+    position:relative;
+    right: 1px;
+
+}
+.messagemy:hover .retrytype,.messagemy:hover .retrytypemy{
+opacity: 1;
+color:#d3d8dd
+}
+.messagemy:hover .retrytype span:hover,.messagemy:hover .retrytypemy span:hover{
+  color:black
+}
+.messagemy:hover .retrytypemy{
+  right: 10px;
+}
+.messagemy:hover .retrytype{
+  left: 10px;
 }
 </style>

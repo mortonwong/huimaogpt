@@ -59,7 +59,7 @@ function changeNav() {
     </div>
   </header>
   <div class="h-full dark:bg-[#1f2121] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
-    <div class="h-full overflow-hidden" :class="[isMobile ? getMobileClass : 'pcFrame']">
+    <div class="h-full overflow-hidden dark:border-[#232525]" :class="[isMobile ? getMobileClass : 'pcFrame']">
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider style="">
         <Sider />
         <NLayoutContent style="" class="h-full">
@@ -78,6 +78,7 @@ function changeNav() {
   /* height: 93%; */
   border-radius: 20px;
   position: relative;
+  border:solid 1px #e7e8ff
   /* box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16); */
 }
 .mainNav{
