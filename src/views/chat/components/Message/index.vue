@@ -163,13 +163,16 @@ function closeSkeleton() {
     color: white;
     border-radius: 10px;
     margin: 3px;
-    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
+    transition: box-shadow 0.2s ease;
 }
 .gptSay{
-  border-radius: 10px;
-    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
+  border-radius: 0 10px 10px 10px;
     position: relative;
     margin: 3px;
-    background: #fff;
+    background: #ebeff6;
+    transition: box-shadow 0.2s ease;
+}
+.gptSay:hover,.mySay:hover{
+  box-shadow: 0px 1px 3px rgb(6 6 6 / 24%)
 }
 </style>

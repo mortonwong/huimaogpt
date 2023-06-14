@@ -6,7 +6,7 @@ import List from './List.vue'
 import Footer from './Footer.vue'
 import { useAppStore, useChatStore } from '@/store'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { PromptStore } from '@/components/common'
+import { PromptStore, SvgIcon } from '@/components/common'
 import { useTheme } from '@/hooks/useTheme'
 
 const { isDark } = useTheme()
@@ -66,7 +66,7 @@ const wxshow = ref(false)
   <NLayoutSider
     :collapsed="collapsed"
     :collapsed-width="0"
-    :width="260"
+    :width="298"
     :show-trigger="isMobile ? false : 'arrow-circle'"
     collapse-mode="transform"
     :position="isMobile ? 'absolute' : 'static'"
@@ -77,8 +77,9 @@ const wxshow = ref(false)
     <div class="flex flex-col h-full" :style="mobileSafeArea">
       <main class="flex flex-col flex-1 min-h-0">
         <div class="p-4">
-          <NButton dashed block size="large" @click="handleAdd">
-            + {{ $t('chat.newChatButton') }}
+          <NButton dashed block size="large" style="border: dashed 1px #3868c9;" @click="handleAdd">
+            <SvgIcon icon="ic:round-add" class="mx-[3px] text-[20px]" />
+            {{ $t('chat.newChatButton') }}
           </NButton>
         </div>
         <div class="flex-1 min-h-0 pb-4 overflow-hidden">
@@ -110,9 +111,7 @@ const wxshow = ref(false)
 
 <style>
 .mySider{
-  border-radius: 10px;
-    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16);
-    margin: 3px;
+    box-shadow: inset -2px 0 2px 0 rgba(0,0,0,.05)
 }
 .leftBottomButton{
   padding:0rem 1rem 1rem;

@@ -23,7 +23,7 @@ watch(
 
 <template>
   <div
-    v-if="!isDark" class="image" style="background-image: url(https://www.bing.com/cdx/bg-sprite.png); background-position: 0% 0%; opacity: 1;    position: fixed;
+    v-if="!isDark" class="image" style="background-image: url(https://www.bing.com/cdx/bg-sprite.png); background-position: 0% 20%; opacity: 1;    position: fixed;
           height: 100vh;
           width: 100vw;"
   />

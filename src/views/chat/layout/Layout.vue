@@ -60,9 +60,9 @@ function changeNav() {
   </header>
   <div class="h-full dark:bg-[#1f2121] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
     <div class="h-full overflow-hidden" :class="[isMobile ? getMobileClass : 'pcFrame']">
-      <NLayout class="z-40 transition" :class="getContainerClass" has-sider style="background-color: transparent;">
+      <NLayout class="z-40 transition" :class="getContainerClass" has-sider style="">
         <Sider />
-        <NLayoutContent style="background-color: transparent;" class="h-full">
+        <NLayoutContent style="" class="h-full">
           <RouterView v-slot="{ Component, route }">
             <component :is="Component" :key="route.fullPath" />
           </RouterView>
@@ -76,7 +76,7 @@ function changeNav() {
 .pcFrame {
   /* width: 1196px; */
   /* height: 93%; */
-  border-radius: 12px;
+  border-radius: 20px;
   position: relative;
   /* box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.12), 0px 1.6px 3.6px rgba(0, 0, 0, 0.16); */
 }

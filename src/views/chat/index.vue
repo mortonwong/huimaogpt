@@ -532,7 +532,7 @@ function checkPermission() {
         <div
           id="image-wrapper"
           class="w-full max-w-screen-xl m-auto"
-          :class="[isMobile ? 'p-2' : 'p-4']"
+          :class="[isMobile ? 'p-2 pt-12' : 'p-4']"
         >
           <template v-if="!dataSources.length">
             <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
