@@ -24,7 +24,7 @@ watch(
 
 <template>
   <div
-    v-if="!isDark" class="image" style="background-image: url(/bg.png); opacity: 1;background-size: cover;    position: fixed;
+    v-if="!isDark" class="image" style="background-image:linear-gradient(45deg, #8cb0ef5c 0%,#f9f6fc 50%, #d0e5ff 100%); opacity: 1;background-size: cover;    position: fixed;
           height: 100vh;
           width: 100vw;"
   />
