@@ -143,7 +143,7 @@ function closeSkeleton() {
           :loading="loading"
           :show-too-long="showTooLong"
           :as-raw-text="asRawText"
-          :class="[inversion ? 'mySay' : 'gptSay']"
+          class="dark:border-[#3c3c3c]" :class="[inversion ? 'mySay' : 'gptSay']"
           @load="closeSkeleton"
         />
         <NSkeleton v-if="showSkeleton" height="40px" round />
