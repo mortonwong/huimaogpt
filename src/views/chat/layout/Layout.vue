@@ -58,7 +58,7 @@ function changeNav() {
       文档Chat
     </div>
   </header>
-  <div class="h-full dark:bg-[#1f2121] transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
+  <div class="h-full transition-all" :class="[isMobile ? 'p-0' : 'p-4']">
     <div class="h-full overflow-hidden dark:border-[#232525]" :class="[isMobile ? getMobileClass : 'pcFrame']">
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider style="">
         <Sider />

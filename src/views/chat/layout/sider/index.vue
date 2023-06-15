@@ -70,7 +70,7 @@ const wxshow = ref(false)
     :show-trigger="isMobile ? false : 'arrow-circle'"
     collapse-mode="transform"
     :position="isMobile ? 'absolute' : 'static'"
-    :style="`${getMobileClass};z-index:41;background-color:${isDark ? '#232525' : '#f7f9fd'}`"
+    :style="`${getMobileClass};z-index:41;background-color:${isDark ? '#18171e' : '#f7f9fd'}`"
     class="mySider"
     @update-collapsed="handleUpdateCollapsed"
   >
@@ -89,10 +89,9 @@ const wxshow = ref(false)
             <NGradientText
               :gradient="{
                 deg: 126,
-                from: 'rgb(16 47 215) ',
-                to: 'rgb(194 43 187)',
+                from: isDark ? 'rgb(126 138 207)' : 'rgb(16 47 215) ',
+                to: isDark ? 'rgb(198 132 195)' : 'rgb(194 43 187)',
               }"
-              class="dark:text-white"
             >
               知潮
             </NGradientText><br><span style="font-size: 8px;color:#a6acd0">AI is First Productivity</span>

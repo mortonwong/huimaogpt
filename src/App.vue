@@ -14,7 +14,7 @@ watch(
   () => isDark.value,
   (dark) => {
     if (dark)
-      document.body.style.background = '#1f2121'
+      document.body.style.background = '#1e1e23'
     else
       document.documentElement.classList.remove('dark')
   },
@@ -24,7 +24,7 @@ watch(
 
 <template>
   <div
-    v-if="!isDark" class="image" style="background-image:linear-gradient(45deg, #8cb0ef5c 0%,#f9f6fc 50%, #d0e5ff 100%); opacity: 1;background-size: cover;    position: fixed;
+    v-if="!isDark" class="image" style="background-image:linear-gradient(45deg, #d5e2f9 0%, rgb(249, 246, 252) 50%, rgb(208, 229, 255) 100%); opacity: 1;background-size: cover;    position: fixed;
           height: 100vh;
           width: 100vw;"
   />
