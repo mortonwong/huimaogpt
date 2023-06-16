@@ -33,6 +33,22 @@ function handleLogin() {
     <div class="flex-1 min-w-0 ml-2">
       <h2 class="overflow-hidden font-bold text-md text-ellipsis whitespace-nowrap">
         {{ userInfo.isLogin ? userInfo.name : '点击登录' }}
+        <span
+          style="display: inline-flex;
+    align-items: center;
+    cursor: pointer;"
+        ><div
+          style="    height: 20px;
+    background-color: rgb(206, 234, 202);
+    color: rgb(79, 164, 68);
+    font-size: 12px;
+    padding: 1px 8px;
+    line-height: 18px;
+    border-radius: 10px;
+    font-weight: 400;
+    position: relative;
+    top: -1px;left:2px;"
+        >免费</div></span>
       </h2>
       <p class="overflow-hidden text-xs text-gray-500 text-ellipsis whitespace-nowrap">
         <span
